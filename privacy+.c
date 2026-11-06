@@ -1,77 +1,83 @@
 #include <stdio.h>
 #include <string.h>
 
+void apply_encryption(char *message, int size) // encryption function
+{
+    for (int i = 0; i < size; i++)
+    {
+        int q = 32 + (6 * (int)message[i] + 94) % 95;
+        message[i] = (char)q;
+    }
+}
+
+void apply_decryption(char *message, int size) // decryption function
+{
+    for (int i = 0; i < size; i++)
+    {
+
+        int x = (int)message[i] - 32;
+        int decrypted_val = (16 * (x + 1)) % 95;
+        if (decrypted_val < 32)
+        {
+            decrypted_val += 95;
+        }
+
+        message[i] = (char)decrypted_val;
+    }
+}
+
 int main()
 {
     char message[41] = "0";
-    int comand_choice;
+    int command_choice;
     printf("=========================================\n");
     printf("1 for encryption.\n2 for decryption.\n");
-    printf("ENTER YOUR COUMAND [1 OR 2]: ");
-    scanf("%d", &comand_choice);
+    printf("ENTER YOUR COMMAND [1 OR 2]: ");
+    scanf("%d", &command_choice);
 
     while (getchar() != '\n')
         ;
 
-    if (comand_choice == 1) // encrypting message
+    if (command_choice == 1) // encrypting message
     {
 
         printf("enter message to encrypt: ");
-        if (fgets(message, sizeof(message), stdin) != NULL)
+        if (fgets(message, sizeof(message) / sizeof(message[0]), stdin) != NULL)
         {
-            int len = strlen(message);
-            if (len > 0 && message[len - 1] == '\n')
-            {
-                message[len - 1] = '\0';
-            }
+            int last_index = strcspn(message, "\n"); // find the new line character
+            message[last_index] = '\0';              // replaces the new line character with nul terminator
         }
         printf("-------------------------------------------\n");
         printf("ENCRYPTED MESSAGE:");
-        int len = strlen(message);
-        for (int i = 0; i < len; i++)
-        {
-            int q = 32 + (6 * (int)message[i] + 94) % 95; // like Affine
+        int length = strlen(message);
 
-            printf("%c", (char)q);
-        }
+        apply_encryption(message, length);
+        printf("%s", message);
+
         printf("\n-------------------------------------------\n");
     }
 
-    else if (comand_choice == 2) // decrepting message
+    else if (command_choice == 2) // decrypting message
     {
         printf("enter encrypted message: ");
-        if (fgets(message, sizeof(message), stdin) != NULL)
+        if (fgets(message, sizeof(message) / sizeof(message[0]), stdin) != NULL)
         {
-            int len = strlen(message);
-            if (len > 0 && message[len - 1] == '\n')
-            {
-                message[len - 1] = '\0';
-            }
+            int last_index = strcspn(message, "\n"); // finds the new line character
+            message[last_index] = '\0';              // replaces the new line character with nul terminator
         }
         printf("-------------------------------------------\n");
         printf("DECRYPTED MESSAGE:");
-        int len = strlen(message);
-        for (int i = 0; i < len; i++)
-        {
-            // decrypting equaiton.
-            int y = (int)message[i] - 32;
+        int length = strlen(message);
 
-            int decrypted_val = (16 * (y + 1)) % 95;
+        apply_decryption(message, length);
+        printf("%s", message);
 
-            if (decrypted_val < 32)
-            {
-                decrypted_val += 95;
-            }
-
-            // 4. Output the decrypted character
-            printf("%c", (char)decrypted_val);
-        }
         printf("\n-------------------------------------------\n");
     }
 
     else
     {
-        printf("INVALID COMAND!!");
+        printf("INVALID COMMAND!!");
     }
 
     printf("\n\n");
