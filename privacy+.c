@@ -30,7 +30,12 @@ int main()
     char message[41] = "0";
     int command_choice;
     printf("=========================================\n");
-    printf("1 for encryption.\n2 for decryption.\n3 for file encryption.\n4 for file decryption.\n");
+    printf("WELCOME TO THE ENCRYPTION/DECRYPTION PROGRAM\n");
+    printf("1-> Encrypt message\n");
+    printf("2-> Decrypt message\n");
+    printf("3-> Encrypt file (only .txt files)\n");
+    printf("4-> Decrypt file (only .txt files)\n");
+    printf("=========================================\n");
     printf("ENTER YOUR COMMAND [1 to 4]: ");
     scanf("%d", &command_choice);
 
@@ -39,7 +44,6 @@ int main()
 
     if (command_choice == 1) // encrypting message
     {
-
         printf("enter message to encrypt: ");
         if (fgets(message, sizeof(message) / sizeof(message[0]), stdin) != NULL)
         {
@@ -73,9 +77,8 @@ int main()
 
         printf("\n-------------------------------------------\n");
     }
-    else if (command_choice == 3)
+    else if (command_choice == 3) // encrypting file
     {
-        // File encryption logic
         FILE *fptr;
         FILE *fptr2;
         char string_data[250];
@@ -86,7 +89,6 @@ int main()
 
         if (fgets(filename, sizeof(filename) / sizeof(filename[0]), stdin) != NULL)
         {
-
             int last_index = strcspn(filename, "\n");
             filename[last_index] = '\0';
         }
@@ -115,13 +117,13 @@ int main()
             fprintf(fptr2, "%s", string_data);
             fprintf(fptr2, "\n");
         }
+        printf("File encrypted successfully. Encrypted file name: %s\n", combined);
 
         fclose(fptr);
         fclose(fptr2);
     }
-    else if (command_choice == 4)
+    else if (command_choice == 4) // decrypting file
     {
-        // File decryption logic
         FILE *fptr;
         FILE *fptr2;
         char string_data[250];
@@ -170,6 +172,7 @@ int main()
             fprintf(fptr2, "%s", string_data);
             fprintf(fptr2, "\n");
         }
+        printf("File decrypted successfully. Decrypted file name: %s\n", combined);
 
         fclose(fptr);
         fclose(fptr2);
