@@ -30,8 +30,8 @@ int main()
     char message[41] = "0";
     int command_choice;
     printf("=========================================\n");
-    printf("1 for encryption.\n2 for decryption.\n");
-    printf("ENTER YOUR COMMAND [1 OR 2]: ");
+    printf("1 for encryption.\n2 for decryption.\n3 for file encryption.\n4 for file decryption.\n");
+    printf("ENTER YOUR COMMAND [1 to 4]: ");
     scanf("%d", &command_choice);
 
     while (getchar() != '\n')
@@ -72,6 +72,107 @@ int main()
         printf("%s", message);
 
         printf("\n-------------------------------------------\n");
+    }
+    else if (command_choice == 3)
+    {
+        // File encryption logic
+        FILE *fptr;
+        FILE *fptr2;
+        char string_data[250];
+        char filename[31];
+        char prefix[11] = "encrypted_";
+        char combined[42];
+        printf("[file name must be less than 31 characters]\nenter file name: ");
+
+        if (fgets(filename, sizeof(filename) / sizeof(filename[0]), stdin) != NULL)
+        {
+
+            int last_index = strcspn(filename, "\n");
+            filename[last_index] = '\0';
+        }
+
+        fptr = fopen(filename, "r");
+        if (fptr == NULL)
+        {
+            printf("Error! opening file");
+            return 1;
+        }
+
+        snprintf(combined, sizeof(combined), "%s%s", prefix, filename);
+        fptr2 = fopen(combined, "w");
+        if (fptr2 == NULL)
+        {
+            printf("Error! opening file");
+            return 1;
+        }
+
+        while (fgets(string_data, sizeof(string_data) / sizeof(string_data[0]), fptr) != NULL)
+        {
+            // Remove the trailing newline so it doesn't get encrypted
+            string_data[strcspn(string_data, "\r\n")] = '\0';
+
+            apply_encryption(string_data, strlen(string_data));
+            fprintf(fptr2, "%s", string_data);
+            fprintf(fptr2, "\n");
+        }
+
+        fclose(fptr);
+        fclose(fptr2);
+    }
+    else if (command_choice == 4)
+    {
+        // File decryption logic
+        FILE *fptr;
+        FILE *fptr2;
+        char string_data[250];
+        char filename[31];
+        char prefix[11] = "decrypted_";
+        char combined[42];
+        printf("[file name must be less than 31 characters]\nenter file name: ");
+
+        if (fgets(filename, sizeof(filename) / sizeof(filename[0]), stdin) != NULL)
+        {
+
+            int last_index = strcspn(filename, "\n");
+            filename[last_index] = '\0';
+        }
+
+        fptr = fopen(filename, "r");
+        if (fptr == NULL)
+        {
+            printf("Error! opening file");
+            return 1;
+        }
+
+        char *target_prefix = "encrypted_";
+        int prefix_len = strlen(target_prefix);
+
+        if (strncmp(filename, target_prefix, prefix_len) == 0)
+        {
+            // Shift the rest of the string to the beginning, deleting "encrypted_"
+            memmove(filename, filename + prefix_len, strlen(filename) - prefix_len + 1);
+        }
+
+        snprintf(combined, sizeof(combined), "%s%s", prefix, filename);
+        fptr2 = fopen(combined, "w");
+        if (fptr2 == NULL)
+        {
+            printf("Error! opening file");
+            return 1;
+        }
+
+        while (fgets(string_data, sizeof(string_data) / sizeof(string_data[0]), fptr) != NULL)
+        {
+            // Remove the trailing newline so it doesn't get encrypted
+            string_data[strcspn(string_data, "\r\n")] = '\0';
+
+            apply_decryption(string_data, strlen(string_data));
+            fprintf(fptr2, "%s", string_data);
+            fprintf(fptr2, "\n");
+        }
+
+        fclose(fptr);
+        fclose(fptr2);
     }
 
     else
