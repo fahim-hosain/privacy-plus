@@ -195,7 +195,8 @@ int main()
         }
 
         printf("\n");
-
-        return 0;
+        printf("Press enter to continue...\n");
+        getchar(); // Wait for user input before exiting
     }
+    return 0;
 }
