@@ -29,7 +29,7 @@ privacy-plus/
 
 ## Getting Started
 
-### Quick Run (Windows — No Compiler or Git Needed)
+### Quick Run (OS-Independent, No Compiler or Git Needed)
 You do **not** need GCC, Git, or any development tools installed to use Privacy+.
 
 1. **Download the program:**
@@ -55,7 +55,7 @@ Once launched, choose from the 5 available menu options:
 1. **Encrypt a Message:** Enter a string (max 40 characters) to immediately view its encrypted output.
 2. **Decrypt a Message:** Paste an encrypted string to decode it back to plaintext.
 3. **Encrypt a `.txt` File:** Enter the exact filename (e.g., `secret.txt`). The program generates `encrypted_secret.txt`. *(Make sure the `.txt` file is in the same folder as the `.exe`.)*
-4. **Decrypt a `.txt` File:** Enter the encrypted filename (e.g., `encrypted_secret.txt`). The program generates `decrypt_encrypted_secret.txt`.
+4. **Decrypt a `.txt` File:** Enter the encrypted filename (e.g., `encrypted_secret.txt`). The program generates `decrypt_secret.txt`.
 5. **Exit:** Safely terminates the program.
 
 ---
