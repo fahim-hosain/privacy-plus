@@ -1,6 +1,6 @@
 # Privacy+
 
-**Privacy+** is a lightweight, zero-dependency encryption and decryption tool written entirely in C. Designed for high-stakes environments—such as protests, network crackdowns, government surveillance, military field operations, and machine-level communication—it transforms plaintext messages and `.txt` files into unreadable ciphertext using ASCII-shifting mathematical equations.
+**Privacy+** is a lightweight, zero-dependency encryption and decryption tool written entirely in C. Designed for high-stakes environments—such as protests, network crackdowns, government surveillance, military field operations, and machine-level communication—it transforms plaintext messages and `.txt` files into unreadable obfuscation text using mathematical equations.
 
 ---
 
@@ -55,7 +55,7 @@ Once launched, choose from the 5 available menu options:
 1. **Encrypt a Message:** Enter a string (max 40 characters) to immediately view its encrypted output.
 2. **Decrypt a Message:** Paste an encrypted string to decode it back to plaintext.
 3. **Encrypt a `.txt` File:** Enter the exact filename (e.g., `secret.txt`). The program generates `encrypted_secret.txt`. *(Make sure the `.txt` file is in the same folder as the `.exe`.)*
-4. **Decrypt a `.txt` File:** Enter the encrypted filename (e.g., `encrypted_secret.txt`). The program generates `decrypt_secret.txt`.
+4. **Decrypt a `.txt` File:** Enter the encrypted filename (e.g., `encrypted_secret.txt`). The program generates `decrypted_secret.txt`.
 5. **Exit:** Safely terminates the program.
 
 ---
@@ -92,7 +92,7 @@ Privacy+ is actively evolving from a foundational prototype into a resilient, fi
 
 ## Disclaimer
 
-This tool is built for class project and for educational purposes, lightweight obfuscation, and offline/air-gapped communication scenarios. Because the current version uses a static mathematical equation, it should not yet be relied upon as a replacement for audited, industry-standard cryptographic protocols (such as AES-256 or PGP) when facing advanced cryptanalysis.
+This tool is built as a class project and for educational purposes, lightweight obfuscation, and offline/air-gapped communication scenarios. Because the current version uses a static mathematical equation, it should not yet be relied upon as a replacement for audited, industry-standard cryptographic protocols (such as AES-256 or PGP) when facing advanced cryptanalysis.
 
 ## License
 
